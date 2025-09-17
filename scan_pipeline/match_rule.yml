@@ -1,0 +1,21 @@
+﻿rules:
+  - id: detect-os-system
+    languages: [python]
+    severity: ERROR
+    message: "Use of os.system — possible command injection"
+    pattern: os.system(...)
+
+  - id: detect-input
+    languages: [python]
+    severity: INFO
+    message: "Use of input() — untrusted user input"
+    pattern: input(...)
+
+  - id: detect-subprocess
+    languages: [python]
+    severity: WARNING
+    message: "Use of subprocess.* — possible exec/spawn"
+    pattern-either:
+      - pattern: subprocess.call(...)
+      - pattern: subprocess.Popen(...)
+      - pattern: subprocess.run(...)
